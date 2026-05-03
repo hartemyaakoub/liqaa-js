@@ -1,0 +1,75 @@
+{
+  "name": "@liqaa/js",
+  "version": "1.0.0",
+  "description": "Drop-in video calls and messaging for any website. Modern WebRTC SDK by LIQAA Cloud.",
+  "keywords": [
+    "video",
+    "video-call",
+    "webrtc",
+    "messaging",
+    "liqaa",
+    "tkawen",
+    "livekit",
+    "sfu",
+    "rtc",
+    "video-sdk",
+    "video-api",
+    "real-time",
+    "rtl",
+    "arabic"
+  ],
+  "homepage": "https://liqaa.io",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hartemyaakoub/liqaa-js.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hartemyaakoub/liqaa-js/issues",
+    "email": "support@liqaa.io"
+  },
+  "author": {
+    "name": "TKAWEN — LIQAA Cloud",
+    "email": "partners@tkawen.com",
+    "url": "https://liqaa.io"
+  },
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "browserslist": [
+    "Chrome >= 88",
+    "Firefox >= 78",
+    "Safari >= 14",
+    "Edge >= 88",
+    "iOS >= 14.5"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts --clean",
+    "dev": "tsup src/index.ts --format esm --watch",
+    "test": "vitest",
+    "test:e2e": "playwright test",
+    "lint": "eslint src",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

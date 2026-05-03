@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LIQAA · Vanilla HTML example</title>
+  <style>
+    body { font-family: -apple-system, system-ui, sans-serif; max-width: 640px; margin: 80px auto; padding: 0 24px; color: #0f172a; }
+    h1 { font-size: 32px; margin-bottom: 8px; }
+    p { color: #64748b; line-height: 1.7; }
+    button { padding: 14px 22px; background: #1d4ed8; color: #fff; border: none; border-radius: 10px; font-size: 14px; font-weight: 700; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h1>Talk to support — Vanilla HTML</h1>
+  <p>This page loads <code>liqaa.io/sdk.js</code> directly. The floating bubble appears bottom-right. Clicking the button below starts a video call with our support agent.</p>
+
+  <button onclick="LIQAA.startCall('support@yoursite.com', 'Support')">
+    🎥 Start video call
+  </button>
+
+  <!--
+    In production: render the data-token from your server-side template.
+    The token is a 1-hour JWT scoped to the visitor's identity.
+    See: https://liqaa.io/docs#quickstart
+  -->
+  <script
+    src="https://liqaa.io/sdk.js"
+    data-key="pk_live_YOUR_KEY"
+    data-token="REPLACE_WITH_SERVER_RENDERED_SDK_TOKEN"
+    data-accent="#1d4ed8"
+    data-position="right"
+    async
+  ></script>
+</body>
+</html>
