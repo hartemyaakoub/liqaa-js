@@ -1,0 +1,26 @@
+cff-version: 1.2.0
+title: 'LIQAA JavaScript SDK'
+message: 'If you use this software, please cite it as below.'
+type: software
+authors:
+  - given-names: Yaakoub
+    family-names: HARTEM
+    email: yaakoub.hartem.mhsi@gmail.com
+    affiliation: 'TKAWEN'
+    orcid: ''
+repository-code: 'https://github.com/hartemyaakoub/liqaa-js'
+url: 'https://liqaa.io'
+abstract: >-
+  Drop-in JavaScript SDK for adding video calls and messaging
+  to any website. Built on WebRTC + LiveKit SFU, with
+  HMAC-signed webhooks and JWT-based per-user authentication.
+keywords:
+  - webrtc
+  - video
+  - sdk
+  - real-time
+  - messaging
+  - livekit
+license: MIT
+version: 1.0.0
+date-released: '2026-04-30'

@@ -1,0 +1,8 @@
+# Default reviewer for everything.
+*       @hartemyaakoub
+
+# Critical paths — require explicit owner approval.
+/src/             @hartemyaakoub
+/public/sdk.js    @hartemyaakoub
+/.github/         @hartemyaakoub
+/SECURITY.md      @hartemyaakoub

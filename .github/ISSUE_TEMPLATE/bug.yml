@@ -1,0 +1,60 @@
+name: 🐛 Bug report
+description: Report a bug in @liqaa/js or the drop-in SDK
+title: '[Bug] '
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to file a report. Please fill out as much detail as you can.
+
+  - type: input
+    id: version
+    attributes:
+      label: SDK version
+      description: Run `npm list @liqaa/js` or check the `data-version` attribute on the script tag.
+      placeholder: '1.0.0'
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser & OS
+      placeholder: 'Chrome 130 on macOS 14.5'
+    validations:
+      required: true
+
+  - type: textarea
+    id: repro
+    attributes:
+      label: Minimal reproduction
+      description: Smallest possible code/steps that trigger the bug. Ideally a CodeSandbox / StackBlitz link.
+      render: html
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behaviour
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: What actually happens
+      description: Include any console errors, network failures, or screenshots.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Confirmation
+      options:
+        - label: I have searched [existing issues](https://github.com/hartemyaakoub/liqaa-js/issues) and didn't find a duplicate.
+          required: true
+        - label: This isn't a security vulnerability (those go to security@liqaa.io — see SECURITY.md).
+          required: true

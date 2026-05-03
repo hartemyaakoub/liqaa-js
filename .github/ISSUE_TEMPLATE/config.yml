@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 🔒 Security vulnerability
+    url: mailto:security@liqaa.io
+    about: Please report security issues privately. See SECURITY.md.
+  - name: 💬 Question / Discussion
+    url: https://github.com/hartemyaakoub/liqaa-js/discussions
+    about: For general questions, ideas, or to share what you built.
+  - name: 📖 Documentation
+    url: https://liqaa.io/docs
+    about: Read the full developer documentation.
+  - name: 🧭 Status / incidents
+    url: https://liqaa.io/status
+    about: Real-time service health.
+  - name: 📧 Sales / partnerships
+    url: mailto:partners@tkawen.com
+    about: For commercial enquiries.
