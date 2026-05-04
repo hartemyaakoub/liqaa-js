@@ -19,12 +19,12 @@
 
 A modern WebRTC stack you can ship today. JavaScript SDK, REST API, signed webhooks. Production-grade primitives — without the integration weeks.
 
-- ⚡ **5-minute integration** — one `<script>` tag and a floating bubble appears
-- 🔒 **E2EE-ready** — TLS + DTLS-SRTP, JWT-based per-user tokens
-- 🌍 **Global edge** — `<50ms` median signaling latency, 99.99% uptime
-- 📦 **6.4 KB gzipped** — async, non-blocking, no dependencies
-- 🇩🇿 **RTL-ready** — auto-detects Arabic, French, English (more languages WIP)
-- 🔁 **Persistent rooms** — same conversation pair = same room across calls
+- **5-minute integration** — one `<script>` tag and a floating bubble appears
+- **E2EE-ready** — TLS + DTLS-SRTP, JWT-based per-user tokens
+- **Global edge** — `<50ms` median signaling latency, 99.99% uptime
+- **6.4 KB gzipped** — async, non-blocking, no dependencies
+- **RTL-ready** — auto-detects Arabic, French, English (more languages WIP)
+- **Persistent rooms** — same conversation pair = same room across calls
 
 ---
 
@@ -34,10 +34,10 @@ A modern WebRTC stack you can ship today. JavaScript SDK, REST API, signed webho
 
 ```html
 <script
-  src="https://liqaa.io/sdk.js"
-  data-key="pk_live_YOUR_KEY"
-  data-token="<%= sdkToken %>"
-  async
+ src="https://liqaa.io/sdk.js"
+ data-key="pk_live_YOUR_KEY"
+ data-token="<%= sdkToken %>"
+ async
 ></script>
 ```
 
@@ -51,13 +51,13 @@ npm install @liqaa/js
 import { LIQAA } from '@liqaa/js';
 
 const liqaa = await LIQAA.init({
-  publicKey: 'pk_live_YOUR_KEY',
-  sdkToken:  'tkc_…', // exchanged server-side
-  accent:    '#1d4ed8',
+ publicKey: 'pk_live_YOUR_KEY',
+ sdkToken: 'tkc_…', // exchanged server-side
+ accent: '#1d4ed8',
 });
 
 document.querySelector('#call-btn').addEventListener('click', () => {
-  liqaa.startCall('support@yoursite.com', 'Support');
+ liqaa.startCall('support@yoursite.com', 'Support');
 });
 ```
 
@@ -71,13 +71,13 @@ npm install @liqaa/react @liqaa/js
 import { LIQAAProvider, LIQAACallButton } from '@liqaa/react';
 
 export default function App({ sdkToken }) {
-  return (
-    <LIQAAProvider publicKey="pk_live_…" sdkToken={sdkToken}>
-      <LIQAACallButton email="support@yoursite.com">
-        Talk to Support
-      </LIQAACallButton>
-    </LIQAAProvider>
-  );
+ return (
+ <LIQAAProvider publicKey="pk_live_…" sdkToken={sdkToken}>
+ <LIQAACallButton email="support@yoursite.com">
+ Talk to Support
+ </LIQAACallButton>
+ </LIQAAProvider>
+ );
 }
 ```
 
@@ -92,27 +92,27 @@ The browser must never see `sk_live_`. On every page render, your server signs t
 const crypto = require('crypto');
 
 const identity = Buffer.from(JSON.stringify({
-  email: user.email,
-  name:  user.name,
-  ts:    Math.floor(Date.now() / 1000),
+ email: user.email,
+ name: user.name,
+ ts: Math.floor(Date.now() / 1000),
 })).toString('base64');
 
 const signature = crypto
-  .createHmac('sha256', process.env.LIQAA_SK)
-  .update(identity)
-  .digest('hex');
+ .createHmac('sha256', process.env.LIQAA_SK)
+ .update(identity)
+ .digest('hex');
 
 const r = await fetch('https://liqaa.io/api/public/v1/sdk-token', {
-  method:  'POST',
-  headers: {
-    'Authorization': `Bearer ${process.env.LIQAA_SK}`,
-    'Content-Type':  'application/json',
-  },
-  body: JSON.stringify({
-    public_key:      process.env.LIQAA_PK,
-    identity_base64: identity,
-    signature,
-  }),
+ method: 'POST',
+ headers: {
+ 'Authorization': `Bearer ${process.env.LIQAA_SK}`,
+ 'Content-Type': 'application/json',
+ },
+ body: JSON.stringify({
+ public_key: process.env.LIQAA_PK,
+ identity_base64: identity,
+ signature,
+ }),
 });
 
 const { sdk_token } = await r.json();
@@ -125,25 +125,25 @@ Server-side examples for **PHP, Python, Go, Ruby, Laravel, Django** — see [`/e
 
 ## API surface
 
-| Method                                          | Description                                                                |
+| Method | Description |
 | ----------------------------------------------- | -------------------------------------------------------------------------- |
-| `LIQAA.init(opts)`                              | Initialize the SDK. Returns a `LIQAAClient`.                               |
-| `LIQAA.startCall(email, name?)`                 | Start a video call with another user. Persistent room per conversation.    |
-| `LIQAA.openConversationWith(email, name?)`      | Open a chat (text) panel.                                                  |
-| `LIQAA.show()` / `.hide()` / `.toggle()`        | Control bubble visibility.                                                 |
-| `LIQAA.on(event, handler)`                      | Listen to events: `call.started`, `call.ended`, `message.sent`, `error`.   |
-| `LIQAA.destroy()`                               | Tear down the SDK (useful for SPA navigation).                             |
+| `LIQAA.init(opts)` | Initialize the SDK. Returns a `LIQAAClient`. |
+| `LIQAA.startCall(email, name?)` | Start a video call with another user. Persistent room per conversation. |
+| `LIQAA.openConversationWith(email, name?)` | Open a chat (text) panel. |
+| `LIQAA.show()` / `.hide()` / `.toggle()` | Control bubble visibility. |
+| `LIQAA.on(event, handler)` | Listen to events: `call.started`, `call.ended`, `message.sent`, `error`. |
+| `LIQAA.destroy()` | Tear down the SDK (useful for SPA navigation). |
 
 ### Script-tag attributes
 
-| Attribute        | Default       | Description                                          |
+| Attribute | Default | Description |
 | ---------------- | ------------- | ---------------------------------------------------- |
-| `data-key`       | —             | **Required.** Your `pk_live_…`                       |
-| `data-token`     | —             | **Required.** Browser-safe SDK JWT.                  |
-| `data-accent`    | `#1d4ed8`     | Bubble + button color (any hex).                     |
-| `data-position`  | `right`       | `right` or `left`.                                   |
-| `data-locale`    | `auto`        | `en` / `ar` / `fr` — auto-detects page lang.         |
-| `async`          | recommended   | Non-blocking load.                                   |
+| `data-key` | — | **Required.** Your `pk_live_…` |
+| `data-token` | — | **Required.** Browser-safe SDK JWT. |
+| `data-accent` | `#1d4ed8` | Bubble + button color (any hex). |
+| `data-position` | `right` | `right` or `left`. |
+| `data-locale` | `auto` | `en` / `ar` / `fr` — auto-detects page lang. |
+| `async` | recommended | Non-blocking load. |
 
 Full reference at [**liqaa.io/docs**](https://liqaa.io/docs).
 
@@ -151,26 +151,26 @@ Full reference at [**liqaa.io/docs**](https://liqaa.io/docs).
 
 ## Examples
 
-| Stack                | Folder                                              |
+| Stack | Folder |
 | -------------------- | --------------------------------------------------- |
-| Vanilla HTML         | [`examples/vanilla`](./examples/vanilla)             |
-| React + Vite         | [`examples/react`](./examples/react)                 |
-| Next.js (App Router) | [`examples/nextjs`](./examples/nextjs)               |
-| Vue 3                | [`examples/vue`](./examples/vue)                     |
-| Node.js (server)     | [`examples/node-server`](./examples/node-server)     |
-| PHP / Laravel        | [`examples/php-laravel`](./examples/php-laravel)     |
+| Vanilla HTML | [`examples/vanilla`](./examples/vanilla) |
+| React + Vite | [`examples/react`](./examples/react) |
+| Next.js (App Router) | [`examples/nextjs`](./examples/nextjs) |
+| Vue 3 | [`examples/vue`](./examples/vue) |
+| Node.js (server) | [`examples/node-server`](./examples/node-server) |
+| PHP / Laravel | [`examples/php-laravel`](./examples/php-laravel) |
 
 ---
 
 ## Architecture
 
 ```
-┌──────────┐    HTTPS+JWT     ┌──────────────┐    WebRTC+WSS    ┌──────────┐
-│ Browser  │ ──────────────▶  │ LIQAA Cloud  │  ──────────────▶ │ LiveKit  │
-│ + SDK    │                  │ (signaling,  │                  │ SFU mesh │
-│          │ ◀──────────────  │  webhooks,   │  ◀────────────── │ (global) │
-└──────────┘   events/state    │  REST API)   │   media (DTLS)   └──────────┘
-                              └──────────────┘
+ HTTPS+JWT WebRTC+WSS
+ Browser LIQAA Cloud LiveKit
+ + SDK (signaling, SFU mesh
+ webhooks, (global)
+ events/state REST API) media (DTLS)
+
 ```
 
 The SDK speaks HTTPS + JWT to LIQAA Cloud. Media negotiates WebRTC directly with our LiveKit SFU mesh — we never touch the bytes.
@@ -205,4 +205,4 @@ PRs welcome. See [`CONTRIBUTING.md`](./CONTRIBUTING.md) for the dev loop. Issues
 
 ## License
 
-[MIT](./LICENSE) © TKAWEN — LIQAA Cloud. Built in 🇩🇿 Algeria, for the world.
+[MIT](./LICENSE) © TKAWEN — LIQAA Cloud. Built in Algeria, for the world.
